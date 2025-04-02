@@ -30,6 +30,14 @@ void log_t_init(void)
     inst = (struct t_log *)malloc(sizeof(struct t_log));
     memset(inst, 0, sizeof(*inst));
     clock_gettime(CLOCK_MONOTONIC, &inst->start_time);
+    inst->lvl = LOG_L_INFO; /* default level */
+}
+
+void log_t_set_level(enum log_level l)
+{
+    if (inst == NULL)
+        return;
+    inst->lvl = l;
 }
 
 void __t_log(enum log_level l, const char *fname, int line, const char *fn_name,
@@ -40,6 +48,10 @@ void __t_log(enum log_level l, const char *fname, int line, const char *fn_name,
     FILE *stream = NULL;
     double elapsed_time = 0;
     struct timespec current_time;
+
+    /* only l >= inst->level && l < LOG_L_TOTAL will be logged */
+    if (l < inst->lvl || l >= LOG_L_TOTAL)
+        return;
 
     clock_gettime(CLOCK_MONOTONIC, &current_time);
     /* microsecond precision */

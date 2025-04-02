@@ -21,12 +21,13 @@ enum log_level {
 };
 
 struct t_log {
-    int tmp;
+    int lvl;
     struct timespec start_time;
 };
 
 
 void log_t_init(void);
+void log_t_set_level(enum log_level l);
 
 /* log output format
  * <log level>(def,opt) [<time>(def,opt)] <filename><def,opt> -- <function>(def,opt).<linenumber>(def, opt): <message>(req)
