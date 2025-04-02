@@ -19,5 +19,7 @@ int main(void)
     log_error("hello world\n");
     log_fatal("hello world\n");
 
+    log_t_deinit();
+
     return 0;
 }

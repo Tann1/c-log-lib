@@ -27,6 +27,7 @@ struct t_log {
 
 
 void log_t_init(void);
+void log_t_deinit(void);
 void log_t_set_level(enum log_level l);
 
 /* log output format

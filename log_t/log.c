@@ -33,6 +33,13 @@ void log_t_init(void)
     inst->lvl = LOG_L_INFO; /* default level */
 }
 
+void log_t_deinit(void)
+{
+    if (inst)
+        free(inst);
+    inst = NULL;
+}
+
 void log_t_set_level(enum log_level l)
 {
     if (inst == NULL)
